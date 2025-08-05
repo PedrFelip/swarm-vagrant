@@ -21,6 +21,12 @@ Vagrant.configure("2") do |config|
       ip: "192.168.56.12",
       memory: 1024,
       cpus: 1
+    },
+    {
+      name: "node03",
+      ip: "192.168.56.13",
+      memory: 1024,
+      cpus: 1,
     }
   ]
 
