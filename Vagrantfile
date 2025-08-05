@@ -5,19 +5,19 @@ Vagrant.configure("2") do |config|
 
   nodes = [
     {
-      name: "Master",
+      name: "master",
       ip: "192.168.56.10",
       memory: 1024,
       cpus: 1
     },
     {
-      name: "Node01",
+      name: "node01",
       ip: "192.168.56.11",
       memory: 1024,
       cpus: 1
     },
     {
-      name: "Node02",
+      name: "node02",
       ip: "192.168.56.12",
       memory: 1024,
       cpus: 1
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
 
       vm.vm.provider "virtualbox" do |vb|
-        vb.name = "Swarm-#{[:name]}"
+        vb.name = "Swarm-#{node[:name]}"
         vb.memory = node[:memory]
         vb.cpus = node[:cpus]
       end
