@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Atualizar o sistema
+      dnf:
+        name: '*'
+        state: latest
+        update_cache: yes
+
+    - name: Instala dnf-plugins-core
+      dnf:
+        name: dnf-plugins-core
+        state: present
+
+    - name: Adiciona o repositório oficial do Docker
+      command: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Instalação dos pacotes do Docker
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: latest
+
+    - name: Ativa e inicia o serviço do Docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
