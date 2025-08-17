@@ -1,6 +1,5 @@
 ---
-- name: Configurar Docker Swarm
-  host: all
+- hosts: all
   become: true
   tasks:
 
@@ -8,7 +7,7 @@
       command: docker swarm init --advertise-addr 192.168.56.10
       args:
         creates: /var/lib/docker/swarm
-      register: swarm-init
+      register: swarm_init
       when: inventory_hostname == 'master'
 
     - name: Token de worker
