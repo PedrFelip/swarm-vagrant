@@ -2,6 +2,11 @@
 - hosts: all
   become: true
   tasks:
+    - name: Iniciar e habilitar o serviço firewalld
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
     - name: Liberar as portas do Swarm
       firewalld:
         port: "{{item}}"
