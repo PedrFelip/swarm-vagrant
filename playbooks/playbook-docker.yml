@@ -34,3 +34,9 @@
         state: started
         enabled: yes
         daemon_reload: yes
+
+    - name: Adicionar usuário vagrant ao grupo docker
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
