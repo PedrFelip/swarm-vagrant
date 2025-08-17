@@ -14,19 +14,16 @@
         name: dnf-plugins-core
         state: present
 
-    - name: Adiciona o repositório oficial do Docker
-      command: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    - name: Baixar script de instalação do Docker
+      get_url:
+        url: https://get.docker.com
+        dest: /tmp/get-docker.sh
+        mode: '0755'
+
+    - name: Executar script de instalação do Docker
+      command: /tmp/get-docker.sh
       args:
-        creates: /etc/yum.repos.d/docker-ce.repo
-    - name: Instalação dos pacotes do Docker
-      dnf:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
-        state: latest
+        creates: /usr/bin/docker
 
     - name: Ativa e inicia o serviço do Docker
       systemd:
